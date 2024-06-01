@@ -36,9 +36,9 @@ public class NotificationAgent extends Agent {
                     sickPositions.add("(" + messageParts[1]+","+messageParts[2] + ")");
                 }
                 if ("Terminate".equals(content) && "AgentManager".equals(receivedMessage.getSender().getLocalName())) {
-                    // Send list of messages to UserAgent
+                    // Send list of messages to ApplicationAgent
                     ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.addReceiver(new AID("UserAgent", AID.ISLOCALNAME));
+                    msg.addReceiver(new AID("ApplicationAgent", AID.ISLOCALNAME));
                     msg.setContent("Report: The Position of sick Plants are :"+String.join(", ", sickPositions));
                     send(msg);
                 }

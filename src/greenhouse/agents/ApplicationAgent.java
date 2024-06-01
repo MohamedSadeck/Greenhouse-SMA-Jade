@@ -4,16 +4,16 @@ import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
-public class UserAgent extends Agent {
+public class ApplicationAgent extends Agent {
     protected void setup() {
-        System.out.println("\nUserAgent initialized.");
+        System.out.println("\nApplicationAgent initialized.");
 
         // Add a cyclic behavior to listen for notifications or commands
         addBehaviour(new ReceiveMessagesBehavior());
     }
 
     protected void takeDown() {
-        System.out.println("\nUserAgent terminated.");
+        System.out.println("\nApplicationAgent terminated.");
         // Add any cleanup code here
     }
 
@@ -28,7 +28,7 @@ public class UserAgent extends Agent {
                 // Handle different types of messages (e.g., alerts, commands)
                 if (content.contains("Report:")) {
                     // Notify the user about the detected disease
-                    System.out.println("\nUA -- "+content);
+                    System.out.println("\nAA -- "+content);
                 }
             } else {
                 block();

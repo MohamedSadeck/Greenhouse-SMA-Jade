@@ -108,3 +108,8 @@ public class AgentManager extends Agent {
         }
     }
 } 
+
+/*
+ * javac -d bin src/greenhouse/agents/*.java
+ * java -cp "lib/jade.jar;bin" jade.Boot -gui -agents AgentManager:greenhouse.agents.AgentManager
+ */

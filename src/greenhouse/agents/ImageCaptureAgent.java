@@ -18,34 +18,40 @@ public class ImageCaptureAgent extends Agent {
     }
 
     private class ListenForPositionBehavior extends CyclicBehaviour {
+        String distance;
         @Override
         public void action() {
             // System.out.println("\nICA -- Listening for position...");
             MessageTemplate mt = MessageTemplate.MatchSender(new AID("AgentManager", AID.ISLOCALNAME));
             ACLMessage msg = myAgent.receive(mt);
             if (msg != null) {
-                // System.out.println("\nICA -- Received position message: " + msg.getContent());
                 String content = msg.getContent();
-                System.out.println("\nICA -- Camera at the Position "+content+" Capturing Image...");
-                try {
-                    Thread.sleep(2000); // Wait for 3 seconds
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("\nICA -- Image Captured. Sending to Image Processing Agent...");
-                try {
-                    Thread.sleep(2000); // Wait for 3 seconds
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 String[] parts = content.split(",");
                 int x = Integer.parseInt(parts[0]);
                 int y = Integer.parseInt(parts[1]);
-    
+                distance = parts[2];
+                captureImage(x, y);
+                sendImage();
                 // Start CaptureImageBehavior with x and y
                 addBehaviour(new CaptureImageBehavior(x, y));
             } else {
                 block();
+            }
+        }
+        private void captureImage(int x,int y) {
+            System.out.println("\nICA -- The Camera moves by "+distance+" meter to the Position ("+x+","+y+") Capturing Image...");
+            try {
+                Thread.sleep(2000); // Wait for 3 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        private void sendImage() {
+            System.out.println("\nICA -- Image Captured. Sending to Image Processing Agent...");
+            try {
+                Thread.sleep(2000); // Wait for 3 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

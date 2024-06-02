@@ -38,7 +38,7 @@ public class DecisionMakingAgent extends Agent {
 
                 // If the plant is sick, trigger the SprayerAgent and NotificationAgent
                 if (healthStatus.equals("Sick")) {
-                    System.out.println("\nDMA -- Plant is sick at position " + positionCoordinates);
+                    System.out.println("\nDMA -- Plant is sick at position (" + positionCoordinates+")");
                     // Send a message to the SprayerAgent to apply pesticide
                     ACLMessage sprayerMessage = new ACLMessage(ACLMessage.REQUEST);
                     sprayerMessage.addReceiver(getAID("SprayerAgent"));
